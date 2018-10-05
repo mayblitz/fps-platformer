@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class PlayerMove : MonoBehaviour
 {
@@ -47,19 +46,20 @@ public class PlayerMove : MonoBehaviour
 
         if (charController.isGrounded)
         {
+            hasJumpedTwice = false;
             verticalVelocity = -5;
 
             if (Input.GetKeyDown(jumpKey))
                 verticalVelocity = jumpForce;
         }
         else if (!hasJumpedTwice && Input.GetKeyDown(jumpKey))
-            verticalVelocity = jumpForce;
-        else
         {
-            hasJumpedTwice = false;
-            verticalVelocity -= gravity * Time.deltaTime;
+            verticalVelocity = jumpForce;
+            hasJumpedTwice = true;
         }
-
+        else
+            verticalVelocity -= gravity * Time.deltaTime;
+        
         Vector3 jumpMovement = transform.up * verticalVelocity;
         Vector3 forwardMovement = transform.forward * vertInput;
         Vector3 rightMovement = transform.right * horizInput;

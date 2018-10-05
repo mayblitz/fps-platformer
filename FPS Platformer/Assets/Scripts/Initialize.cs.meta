@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 40697bb8412e60c4e9a61a636d334cc8
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - pointLight: {fileID: 4553789130569950, guid: 350cd66021ef75d44b5efc20bb03eb17,
+      type: 2}
+  - platform: {fileID: 4911309581548500, guid: 412e9fce05b6d054796d9147378d25c9, type: 2}
+  - player: {fileID: 4962814168217810, guid: c421e8a34f2d8be4998f202bc3aab68d, type: 2}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

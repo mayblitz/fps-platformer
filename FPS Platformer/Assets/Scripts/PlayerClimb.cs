@@ -48,7 +48,7 @@ public class PlayerClimb : MonoBehaviour
         if (!isClimbing &&
             obstacle != null &&
             Input.GetKey(climbKey) &&
-            obstacle.bounds.max.y - player.bounds.max.y <= 0.5f)
+            obstacle.bounds.max.y - player.bounds.max.y <= 0.75f)
         {
             return true;
         }
@@ -76,18 +76,15 @@ public class PlayerClimb : MonoBehaviour
         while (player.bounds.min.y < point.y)
         {
             player.transform.Translate(player.transform.TransformDirection(Vector3.up) * Time.deltaTime * currentSpeed);
-            //player.Move(player.transform.TransformDirection(Vector3.up) * Time.deltaTime * currentSpeed);
             if (player.bounds.min.y < halfDistance)
             {
                 camera.transform.Rotate(Vector3.right * Time.deltaTime * 30f * movementSpeed, Space.Self);
                 player.transform.Translate(Vector3.forward * Time.deltaTime * currentSpeed * 0.15f);
-                //player.Move(Vector3.forward * Time.deltaTime * currentSpeed * 0.15f);
             }
             else
             {
                 camera.transform.Rotate(Vector3.left * Time.deltaTime * 30f * currentSpeed, Space.Self);
                 player.transform.Translate(Vector3.forward * Time.deltaTime * currentSpeed * 1.1f);
-                //player.Move(Vector3.forward * Time.deltaTime * currentSpeed * 1.1f);
             }
 
             if (!changeSpeed && currentSpeed > movementSpeed / 2)
