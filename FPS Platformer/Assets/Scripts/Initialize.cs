@@ -27,8 +27,9 @@ public class Initialize : MonoBehaviour
     private void Awake()
     {
         CreatePlatforms();
-        Vector3 firstLight = CreateLights();
-        CreatePlayer(firstLight);
+        //Vector3 firstLight = CreateLights();
+        //CreatePlayer(firstLight);
+        CreatePlayer();
     }
 
     private void CreatePlatforms()
@@ -93,6 +94,19 @@ public class Initialize : MonoBehaviour
     {
         GameObject player = GameObject.FindWithTag("Player");
         Collider[] platforms = Physics.OverlapSphere(firstLight, 15);
+
+        Collider lowestPlatform = platforms.OrderBy(p => p.transform.localPosition.y).ToArray()[1];
+
+        player.transform.position = new Vector3(
+                   lowestPlatform.transform.position.x,
+                   lowestPlatform.transform.position.y + 4,
+                   lowestPlatform.transform.position.z);
+    }
+
+    private void CreatePlayer()
+    {
+        GameObject player = GameObject.FindWithTag("Player");
+        Collider[] platforms = Physics.OverlapSphere(player.transform.position, 30);
 
         Collider lowestPlatform = platforms.OrderBy(p => p.transform.localPosition.y).ToArray()[1];
 
