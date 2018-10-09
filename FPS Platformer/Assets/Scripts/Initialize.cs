@@ -12,14 +12,14 @@ public class Initialize : MonoBehaviour
     [SerializeField]
     private int maxZ = 100;
 
-    [SerializeField]
-    private int lightIntervalY = 10;
+    //[SerializeField]
+    //private int lightIntervalY = 10;
 
     [SerializeField]
     private int numberOfPlatforms = 2000;
 
-    [SerializeField]
-    private Transform pointLight;
+    //[SerializeField]
+    //private Transform pointLight;
 
     [SerializeField]
     private Transform platform;
@@ -29,7 +29,7 @@ public class Initialize : MonoBehaviour
         CreatePlatforms();
         //Vector3 firstLight = CreateLights();
         //CreatePlayer(firstLight);
-        CreatePlayer();
+        //CreatePlayer();
     }
 
     private void CreatePlatforms()
@@ -64,55 +64,55 @@ public class Initialize : MonoBehaviour
         }
     }
 
-    private Vector3 CreateLights()
-    {
-        bool isFirstLightFound = false;
-        Vector3 firstLight = Vector3.zero;
+    //private Vector3 CreateLights()
+    //{
+    //    bool isFirstLightFound = false;
+    //    Vector3 firstLight = Vector3.zero;
 
-        for (int i = 5; i < maxY; i += lightIntervalY)
-        {
-            Transform point = Instantiate(pointLight);
+    //    for (int i = 5; i < maxY; i += lightIntervalY)
+    //    {
+    //        Transform point = Instantiate(pointLight);
 
-            float x = Random.Range(1, maxX);
-            float z = Random.Range(1, maxZ);
+    //        float x = Random.Range(1, maxX);
+    //        float z = Random.Range(1, maxZ);
 
-            Vector3 position = new Vector3(x, i, z);
+    //        Vector3 position = new Vector3(x, i, z);
 
-            point.localPosition = position;
+    //        point.localPosition = position;
 
-            if (!isFirstLightFound)
-            {
-                firstLight = position;
-                isFirstLightFound = true;
-            }
-        }
+    //        if (!isFirstLightFound)
+    //        {
+    //            firstLight = position;
+    //            isFirstLightFound = true;
+    //        }
+    //    }
 
-        return firstLight;
-    }
+    //    return firstLight;
+    //}
 
-    private void CreatePlayer(Vector3 firstLight)
-    {
-        GameObject player = GameObject.FindWithTag("Player");
-        Collider[] platforms = Physics.OverlapSphere(firstLight, 15);
+    //private void CreatePlayer(Vector3 firstLight)
+    //{
+    //    GameObject player = GameObject.FindWithTag("Player");
+    //    Collider[] platforms = Physics.OverlapSphere(firstLight, 15);
 
-        Collider lowestPlatform = platforms.OrderBy(p => p.transform.localPosition.y).ToArray()[1];
+    //    Collider lowestPlatform = platforms.OrderBy(p => p.transform.localPosition.y).ToArray()[2];
 
-        player.transform.position = new Vector3(
-                   lowestPlatform.transform.position.x,
-                   lowestPlatform.transform.position.y + 4,
-                   lowestPlatform.transform.position.z);
-    }
+    //    player.transform.position = new Vector3(
+    //               lowestPlatform.transform.position.x,
+    //               lowestPlatform.transform.position.y + 4,
+    //               lowestPlatform.transform.position.z);
+    //}
 
     private void CreatePlayer()
     {
         GameObject player = GameObject.FindWithTag("Player");
-        Collider[] platforms = Physics.OverlapSphere(player.transform.position, 30);
+        Collider[] platforms = Physics.OverlapSphere(player.transform.localPosition, 15);
 
-        Collider lowestPlatform = platforms.OrderBy(p => p.transform.localPosition.y).ToArray()[1];
+        Collider lowestPlatform = platforms.OrderBy(p => p.transform.localPosition.y).ToArray()[2];
 
         player.transform.position = new Vector3(
-                   lowestPlatform.transform.position.x,
-                   lowestPlatform.transform.position.y + 4,
-                   lowestPlatform.transform.position.z);
+                   lowestPlatform.transform.localPosition.x,
+                   lowestPlatform.transform.localPosition.y + 4,
+                   lowestPlatform.transform.localPosition.z);
     }
 }
